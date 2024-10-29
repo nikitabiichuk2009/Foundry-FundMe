@@ -1,3 +1,9 @@
+# 🚀 FundMe - Foundry Project 🚀
+
+Welcome to the **FundMe** project! This project is built using **Foundry** and follows the concepts and code taught in the [Cyfrin Foundry course](https://updraft.cyfrin.io/courses/foundry).
+
+DEPLOYED contract on Sepolia: https://sepolia.etherscan.io/address/0x2B503b21483e63699F56357B1c2F5EBc067cAaA2
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
