@@ -8,6 +8,7 @@ import {FundMe} from "../src/FundMe.sol";
 
 contract FundFundMe is Script {
     uint256 constant SEND_VALUE = 0.01 ether;
+
     function fundFundMe(address payable mostRecentlyDeployed) public {
         vm.startBroadcast();
         FundMe(mostRecentlyDeployed).fund{value: SEND_VALUE}();

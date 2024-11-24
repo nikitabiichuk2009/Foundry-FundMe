@@ -6,20 +6,20 @@ import {Test, console} from "forge-std/Test.sol";
 import {FundMe} from "../../src/FundMe.sol";
 import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 
-contract FundMeTest is Test{
+contract FundMeTest is Test {
     FundMe fundMe;
     uint256 constant SEND_VALUE = 0.1 ether;
     uint256 constant STARTING_USER_BALANCE = 10 ether;
     address USER = makeAddr("user");
     uint256 constant GAS_PRICE = 1;
 
-    function setUp() external{
+    function setUp() external {
         // fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         DeployFundMe deployFundMe = new DeployFundMe();
         fundMe = deployFundMe.run();
         vm.deal(USER, STARTING_USER_BALANCE);
     }
-    
+
     function testMinimumdDollarIsFive() public view {
         assertEq(fundMe.MINIMUM_USD(), 5e18);
     }
@@ -45,15 +45,14 @@ contract FundMeTest is Test{
         assertEq(amountFunded, SEND_VALUE);
     }
 
-    function testAddFundersToArrayOfFunders() public funded() {
-
+    function testAddFundersToArrayOfFunders() public funded {
         address funder = fundMe.getFunder(0);
         assertEq(funder, USER);
     }
 
     modifier funded() {
         vm.prank(USER); // the next TX will be sent by USER
-        fundMe.fund{value:SEND_VALUE}();
+        fundMe.fund{value: SEND_VALUE}();
         _;
     }
 
@@ -90,7 +89,7 @@ contract FundMeTest is Test{
 
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
             hoax(address(i), STARTING_USER_BALANCE);
-            fundMe.fund{value:SEND_VALUE}();
+            fundMe.fund{value: SEND_VALUE}();
         }
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
@@ -112,7 +111,7 @@ contract FundMeTest is Test{
 
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
             hoax(address(i), STARTING_USER_BALANCE);
-            fundMe.fund{value:SEND_VALUE}();
+            fundMe.fund{value: SEND_VALUE}();
         }
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
